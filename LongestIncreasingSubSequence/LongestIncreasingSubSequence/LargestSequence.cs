@@ -8,11 +8,14 @@ namespace LongestIncreasingSubSequence
     {
 		public string Find(string numberSequence)
 		{
+			//Create array fron the string 
 			int[] array = numberSequence.Split(' ').Select(p => int.Parse(p)).ToArray();
+
 			List<int> list = new List<int>();
-			List<int> longestList = new List<int>();
 			int currentMax;
 			int highestCount = 0;
+
+			//Store sequences in dictionary
 			Dictionary<int, List<int>> sequences = new Dictionary<int, List<int>>();
 			int key = 1;
 			for (int i = 0; i < array.Length; i++)
@@ -27,6 +30,7 @@ namespace LongestIncreasingSubSequence
 					}
 					else
 					{
+						//Add the sequence to dictionary
 						if (list.Count > 1)
 						{
 							sequences.Add(key, list);
@@ -35,7 +39,6 @@ namespace LongestIncreasingSubSequence
 							if (highestCount < list.Count)
 							{
 								highestCount = list.Count;
-								//longestList = new List<int>(list);
 							}
 						}
 
@@ -43,6 +46,7 @@ namespace LongestIncreasingSubSequence
 					}
 				}
 
+				//Add the sequence to dictionary in case of last item
 				if (list.Count > 1)
 				{
 					sequences.Add(key, list);
@@ -51,20 +55,20 @@ namespace LongestIncreasingSubSequence
 					if (highestCount < list.Count)
 					{
 						highestCount = list.Count;
-						//longestList = new List<int>(list);
 					}
 				}
 
 				list = new List<int>();
 			}
-			Console.WriteLine();
 
 			string output = string.Empty;
-			foreach (int dicKey in sequences.Keys)
+
+			//Get the first longest sequence
+			foreach (int dictionaryKey in sequences.Keys)
 			{
-				if (sequences[dicKey].Count == highestCount)
+				if (sequences[dictionaryKey].Count == highestCount)
 				{
-					output = string.Join<int>(" ", sequences[dicKey]);
+					output = string.Join<int>(" ", sequences[dictionaryKey]);
 					break;
 				}
 			}

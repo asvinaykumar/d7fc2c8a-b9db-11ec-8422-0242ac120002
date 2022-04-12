@@ -1,0 +1,9 @@
+version: '3'
+services:
+  unittests:
+    image: microsoft/dotnet:3.1-sdk
+    volumes:
+      - .:/NUnitTest
+    command:
+      - /bin/bash
+      - run-tests.sh
